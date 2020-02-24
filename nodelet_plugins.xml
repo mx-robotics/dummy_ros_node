@@ -1,0 +1,8 @@
+<library path="lib/libnodelet_dummy_nodelet">
+    <class name="nodelet_dummy/NodeletDummyNodelet" type="nodelet_dummy::NodeletDummyNodelet" base_class_type="nodelet::Nodelet">
+        <description>
+            This nodelet converts markers to mprt format.
+        </description>
+    </class>
+</library>
+
