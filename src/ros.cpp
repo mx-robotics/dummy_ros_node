@@ -8,9 +8,9 @@ void NodeletDummyROS::init(ros::NodeHandle &public_nh, ros::NodeHandle &private_
     ROS_INFO ("Initializing NodeletDummyROS...");
     nh_ = public_nh;
     private_nh_ = private_nh;
-    sub_marker = nh_.subscribe("scan", 10, &NodeletDummyROS::callbackLaser, this);
     reconfigureFnc_ = boost::bind ( &NodeletDummyROS::callbackConfigLocalPlanner, this,  _1, _2 );
     reconfigureServer_.setCallback ( reconfigureFnc_ );
+    sub_laser = nh_.subscribe("scan", 10, &NodeletDummyROS::callbackLaser, this);
 }
 
 

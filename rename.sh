@@ -30,6 +30,7 @@ echo "changing in files ${OLD_PKG_NAME} to ${NEW_PKG_NAME}"
 echo "changing in files ${OldPkgName}   to ${NewPkgName}"
 echo "moving ./cfg/${OldPkgName}.cfg to ./cfg/${NewPkgName}.cfg"
 echo "moving ./include/${old_pkg_name}.cfg to ./include/${new_pkg_name}.cfg"
+echo "removing ./.git"
 
 echo "------------------------------------"
 read -p "Do you wish to start? y/n" yn
@@ -40,11 +41,13 @@ case $yn in
         find . -type f \( -iname "*.*" ! -iname "rename.sh" \) -exec sed -i 's/'"${OldPkgName}"'/'"${NewPkgName}"'/g' {} +
         mv cfg/${OldPkgName}.cfg cfg/${NewPkgName}.cfg
         mv include/${old_pkg_name} include/${new_pkg_name}
+        rm -rf .git
         echo "------------------------------------"
-        echo "Done :-) --> try catkin_make in your workspace root!"
+        echo "renaming done Done :-)"
         ;;
     [Nn]* ) 
         echo "abort renaming"
         ;;
 esac
+    
     

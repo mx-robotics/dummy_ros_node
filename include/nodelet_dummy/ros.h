@@ -13,7 +13,7 @@ namespace nodelet_dummy {
 class NodeletDummyROS {
     
 private:
-    ros::Subscriber sub_marker;
+    ros::Subscriber sub_laser;
     ros::Timer timer_;
     ros::NodeHandle nh_;
     ros::NodeHandle private_nh_;
