@@ -1,16 +1,16 @@
-#include <nodelet_dummy/nodelet.h>
+#include <dummy_ros_node/nodelet.h>
 #include <pluginlib/class_list_macros.h>
 
     
-namespace nodelet_dummy {
+namespace dummy_ros_node {
 
-void NodeletDummyNodelet::onInit() {
+void DummyRosNodeNodelet::onInit() {
 
-    NODELET_INFO ("Initializing nodelet NodeletDummyNodelet...");
-        NodeletDummyROS::init(getNodeHandle(), getPrivateNodeHandle());
+    NODELET_INFO ("Initializing nodelet DummyRosNodeNodelet...");
+        DummyRosNodeROS::init(getNodeHandle(), getPrivateNodeHandle());
 }
 }
 
 
-PLUGINLIB_EXPORT_CLASS (nodelet_dummy::NodeletDummyNodelet, nodelet::Nodelet)
+PLUGINLIB_EXPORT_CLASS (dummy_ros_node::DummyRosNodeNodelet, nodelet::Nodelet)
 //int main(int argc, char **argv) {}

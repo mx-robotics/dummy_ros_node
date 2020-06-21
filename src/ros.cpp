@@ -1,25 +1,25 @@
-#include <nodelet_dummy/ros.h>
+#include <dummy_ros_node/ros.h>
 
 
-namespace nodelet_dummy {
+namespace dummy_ros_node {
 
-void NodeletDummyROS::init(ros::NodeHandle &public_nh, ros::NodeHandle &private_nh) {
+void DummyRosNodeROS::init(ros::NodeHandle &public_nh, ros::NodeHandle &private_nh) {
 
-    ROS_INFO ("Initializing NodeletDummyROS...");
+    ROS_INFO ("Initializing DummyRosNodeROS...");
     nh_ = public_nh;
     private_nh_ = private_nh;
-    reconfigureFnc_ = boost::bind ( &NodeletDummyROS::callbackConfigLocalPlanner, this,  _1, _2 );
+    reconfigureFnc_ = boost::bind ( &DummyRosNodeROS::callbackConfigLocalPlanner, this,  _1, _2 );
     reconfigureServer_.setCallback ( reconfigureFnc_ );
-    sub_laser = nh_.subscribe("scan", 10, &NodeletDummyROS::callbackLaser, this);
+    sub_laser = nh_.subscribe("scan", 10, &DummyRosNodeROS::callbackLaser, this);
 }
 
 
-void NodeletDummyROS::callbackConfigLocalPlanner ( nodelet_dummy::NodeletDummyConfig &config, uint32_t level ) {
+void DummyRosNodeROS::callbackConfigLocalPlanner ( dummy_ros_node::DummyRosNodeConfig &config, uint32_t level ) {
     ROS_INFO ("callbackConfig");
     config_ = config;
 }
 
-void NodeletDummyROS::callbackLaser(const sensor_msgs::LaserScan::ConstPtr &msg) {
+void DummyRosNodeROS::callbackLaser(const sensor_msgs::LaserScan::ConstPtr &msg) {
     ROS_INFO ("callbackLaser");
     
 }

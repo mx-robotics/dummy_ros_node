@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(nodelet_dummy)
+project(dummy_ros_node)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -117,7 +117,7 @@ include_directories(include
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
 generate_dynamic_reconfigure_options(
-  cfg/NodeletDummy.cfg
+  cfg/DummyRosNode.cfg
 )
 
 ###################################
@@ -131,7 +131,7 @@ generate_dynamic_reconfigure_options(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-  LIBRARIES nodelet_dummy_nodelet
+  LIBRARIES dummy_ros_node_nodelet
   CATKIN_DEPENDS nodelet roscpp sensor_msgs 
   DEPENDS nodelet roscpp   
 )
@@ -148,11 +148,11 @@ include_directories(
 )
 
 ## Declare a C++ library
-add_library(nodelet_dummy_nodelet src/nodelet.cpp src/ros.cpp)
+add_library(dummy_ros_node_nodelet src/nodelet.cpp src/ros.cpp)
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-add_dependencies(nodelet_dummy_nodelet 
+add_dependencies(dummy_ros_node_nodelet 
   ${${PROJECT_NAME}_EXPORTED_TARGETS} 
   ${catkin_EXPORTED_TARGETS}
   ${PROJECT_NAME}_gencfg
@@ -161,7 +161,7 @@ add_dependencies(nodelet_dummy_nodelet
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(nodelet_dummy_node src/node.cpp)
+add_executable(dummy_ros_node_node src/node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -178,12 +178,12 @@ add_executable(nodelet_dummy_node src/node.cpp)
 #   ${catkin_LIBRARIES}
 # )
 
-target_link_libraries(nodelet_dummy_nodelet
+target_link_libraries(dummy_ros_node_nodelet
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(nodelet_dummy_node
-  nodelet_dummy_nodelet
+target_link_libraries(dummy_ros_node_node
+  dummy_ros_node_nodelet
   ${catkin_LIBRARIES}
 )
 
@@ -209,7 +209,7 @@ target_link_libraries(nodelet_dummy_node
 
 ## Mark libraries for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
- install(TARGETS nodelet_dummy_nodelet nodelet_dummy_node
+ install(TARGETS dummy_ros_node_nodelet dummy_ros_node_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
@@ -233,7 +233,7 @@ install(FILES
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_nodelet_dummy.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_dummy_ros_node.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

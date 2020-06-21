@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "usage: rename.sh target_name [source_name=nodelet_dummy]"
+echo "usage: rename.sh target_name [source_name=dummy_ros_node"
 echo "------------------------------------"
 
 if [ $# -gt 0 ]; 
@@ -24,6 +24,7 @@ export NewPkgName=`echo "${new_pkg_name}" | perl -pe 's/(^|_)([a-z])/uc($2)/ge'`
 export old_pkg_name=${SOURCE_NAME,,}                                 # to lower case
 export OLD_PKG_NAME=${old_pkg_name^^}                                # to upper case
 export OldPkgName=`echo "${old_pkg_name}" | perl -pe 's/(^|_)([a-z])/uc($2)/ge'`  # to camel case 
+
 
 echo "changing in files ${old_pkg_name} to ${new_pkg_name}"
 echo "changing in files ${OLD_PKG_NAME} to ${NEW_PKG_NAME}"
