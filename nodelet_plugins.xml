@@ -1,5 +1,5 @@
-<library path="lib/libdummy_ros_node_nodelet">
-    <class name="dummy_ros_node/DummyRosNodeNodelet" type="dummy_ros_node::DummyRosNodeNodelet" base_class_type="nodelet::Nodelet">
+<library path="lib/libtemplate_package_nodelet">
+    <class name="template_package/TemplatePackageNodelet" type="template_package::TemplatePackageNodelet" base_class_type="nodelet::Nodelet">
         <description>
             This nodelet converts markers to mprt format.
         </description>

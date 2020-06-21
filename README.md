@@ -1,17 +1,17 @@
-# dummy_ros_node
+# template_package
 A ROS nodelet dummy
 ## change node name to "new_pkg_name"
 * rename the pgk folder to new_pkg_name
-* rename include dummy_ros_node to new_pkg_name
-* rename cfg DummyRosNode.cfg to NewPkgName.cfg
-* rename in all files dummy_ros_node to new_pkg_name 
-* rename in all files DummyRosNode to NewPkgName 
-* rename in all files DUMMY_ROS_NODE to NEW_PGK_NAME 
+* rename include template_package to new_pkg_name
+* rename cfg TemplatePackage.cfg to NewPkgName.cfg
+* rename in all files template_package to new_pkg_name 
+* rename in all files TemplatePackage to NewPkgName 
+* rename in all files TEMPLATE_PACKAGE to NEW_PGK_NAME 
 * update/edit README.md
 
 ```
 # you can run
-./rename.sh new_pkg_name dummy_ros_node 
+./rename.sh new_pkg_name template_package 
 ```
 
 ## To build option for the nodelet

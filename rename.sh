@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "usage: rename.sh target_name [source_name=dummy_ros_node"
+SOURCE_NAME=dummy_ros_node
+echo "usage: rename.sh target_name [source_name=$SOURCE_NAME]"
 echo "------------------------------------"
 
 if [ $# -gt 0 ]; 
@@ -10,7 +11,6 @@ else
   echo "Abort: no target_name"
   exit 0
 fi
-SOURCE_NAME=nodelet_dummy
 if [ $# -gt 1 ]; then
     SOURCE_NAME=$2
 fi
@@ -42,13 +42,24 @@ case $yn in
         find . -type f \( -iname "*.*" ! -iname "rename.sh" \) -exec sed -i 's/'"${OldPkgName}"'/'"${NewPkgName}"'/g' {} +
         mv cfg/${OldPkgName}.cfg cfg/${NewPkgName}.cfg
         mv include/${old_pkg_name} include/${new_pkg_name}
-        rm -rf .git
         echo "------------------------------------"
-        echo "renaming done Done :-)"
+        echo "renaming done :-)"
         ;;
     [Nn]* ) 
         echo "abort renaming"
+        exit
         ;;
 esac
     
+read -p "Do you wish to remove .git? y/n" yn
+case $yn in
+    [Yy]* ) 
+        rm -rf .git
+        echo ".git removed :-)"
+        ;;
+    [Nn]* ) 
+        echo ".git was kept!"
+        exit
+        ;;
+esac
     
