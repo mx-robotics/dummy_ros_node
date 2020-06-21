@@ -8,19 +8,24 @@ void TemplatePackageROS::init(ros::NodeHandle &public_nh, ros::NodeHandle &priva
     ROS_INFO ("Initializing TemplatePackageROS...");
     nh_ = public_nh;
     private_nh_ = private_nh;
-    reconfigureFnc_ = boost::bind ( &TemplatePackageROS::callbackConfigLocalPlanner, this,  _1, _2 );
+    private_nh_.param<double> ( "watchdog_duration", watchdog_duration_, 5.0 );
+    reconfigureFnc_ = boost::bind ( &TemplatePackageROS::callbackConfigTemplatePackage, this,  _1, _2 );
     reconfigureServer_.setCallback ( reconfigureFnc_ );
-    sub_laser = nh_.subscribe("scan", 10, &TemplatePackageROS::callbackLaser, this);
+    sub_laser_ = nh_.subscribe("scan", 10, &TemplatePackageROS::callbackLaser, this);
+    timer_ = nh_.createTimer(ros::Duration(0.1), &TemplatePackageROS::callbackTimerWatchdog, this);
 }
 
+void TemplatePackageROS::callbackTimerWatchdog(const ros::TimerEvent& event) {
+    ROS_WARN ("callbackTimerWatchdog");    /// @note there are some issues with 'rosparam get /use_sim_time'
+}
 
-void TemplatePackageROS::callbackConfigLocalPlanner ( template_package::TemplatePackageConfig &config, uint32_t level ) {
+void TemplatePackageROS::callbackConfigTemplatePackage ( template_package::TemplatePackageConfig &config, uint32_t level ) {
     ROS_INFO ("callbackConfig");
     config_ = config;
 }
 
 void TemplatePackageROS::callbackLaser(const sensor_msgs::LaserScan::ConstPtr &msg) {
-    ROS_INFO ("callbackLaser");
+    ROS_DEBUG ("callbackLaser");
     
 }
 }
