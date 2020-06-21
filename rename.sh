@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SOURCE_NAME=dummy_ros_node
+SOURCE_NAME=template_package
 echo "usage: rename.sh target_name [source_name=$SOURCE_NAME]"
 echo "------------------------------------"
 
@@ -42,6 +42,8 @@ case $yn in
         find . -type f \( -iname "*.*" ! -iname "rename.sh" \) -exec sed -i 's/'"${OldPkgName}"'/'"${NewPkgName}"'/g' {} +
         mv cfg/${OldPkgName}.cfg cfg/${NewPkgName}.cfg
         mv include/${old_pkg_name} include/${new_pkg_name}
+        mv src/${old_pkg_name} src/${new_pkg_name}
+        find -type f -name "${old_pkg_name}*" | rename 's/'"${old_pkg_name}"'/'"${new_pkg_name}"'/'
         echo "------------------------------------"
         echo "renaming done :-)"
         ;;
