@@ -12,16 +12,21 @@ void TemplatePackageROS::init(ros::NodeHandle &public_nh, ros::NodeHandle &priva
     reconfigureFnc_ = boost::bind ( &TemplatePackageROS::callbackConfigTemplatePackage, this,  _1, _2 );
     reconfigureServer_.setCallback ( reconfigureFnc_ );
     sub_laser_ = nh_.subscribe("scan", 10, &TemplatePackageROS::callbackLaser, this);
-    timer_ = nh_.createTimer(ros::Duration(0.1), &TemplatePackageROS::callbackTimerWatchdog, this);
+    timer_ = nh_.createTimer(ros::Duration(watchdog_duration_), &TemplatePackageROS::callbackTimerWatchdog, this);
 }
 
 void TemplatePackageROS::callbackTimerWatchdog(const ros::TimerEvent& event) {
-    ROS_WARN ("callbackTimerWatchdog");    /// @note there are some issues with 'rosparam get /use_sim_time'
+    ROS_DEBUG ("callbackTimerWatchdog");    /// @note there are some issues with 'rosparam get /use_sim_time'
 }
 
 void TemplatePackageROS::callbackConfigTemplatePackage ( template_package::TemplatePackageConfig &config, uint32_t level ) {
     ROS_INFO ("callbackConfig");
     config_ = config;
+    if(config_.debug_loglevel){
+        if( ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug) ) {
+            ros::console::notifyLoggerLevelsChanged();
+        }
+    }
 }
 
 void TemplatePackageROS::callbackLaser(const sensor_msgs::LaserScan::ConstPtr &msg) {
